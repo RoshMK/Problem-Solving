@@ -9,14 +9,10 @@ class PhoneNumber
         # checking the format for correct spaces, - and ()
         for i in 0...14
           #puts "#{num[i]} "
-          if i == 0 || i == 4 || i == 5 || i == 9
-            next
-          end
-          if num[i].match?(/\d/)
-            ch += 1
-          end
+          next if i == 0 || i == 4 || i == 5 || i == 9
+          ch += 1 if num[i].match?(/\d/) 
         end
-        if (num[0] == "(" && num[4] == ")") && (num[5] == " "&&num[9] == "-") && ch == 10
+        if (num[0] == "(" && num[4] == ")") && (num[5] == " " && num[9] == "-") && ch == 10
           puts "Your number #{a} is valid"
           return true
         else
