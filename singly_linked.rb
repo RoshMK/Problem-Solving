@@ -17,7 +17,7 @@ class LinkedList
       @head = Node.new(value)
       return
     end
-    current_node =  @head
+    current_node = @head
     while !current_node.next_node.nil?
       current_node = current_node.next_node
     end
