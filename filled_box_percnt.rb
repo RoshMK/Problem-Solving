@@ -4,37 +4,15 @@ class FilledBoxPerc
     columns = ar[0].length
     count = 0
     print "\n"
-    for i in 0...rows
-      a1 = ar[i].split("")
-      if i.zero?
-        col = columns + 2
-        while col.positive?
-          print '*'
-          col -= 1
-        end
-      end
-      for j in 0...columns
-        print "\n*" if j.zero?
-        if a1[j] == '0'
-          count += 1
-          print '0'
-        else
-          print ' '
-        end
-        print '*' if j == columns - 1
-      end
-      if i == rows - 1
-        col = columns + 2
-        print "\n"
-        while col.positive?
-          print '*'
-          col -= 1
-        end
-      end
+
+    ar.each do |i|
+      p i
+      a1 = i.split('')
+      a1.each { |j| count += 1 if j == '0' }
     end
-    total = rows * columns
+
+    total = (rows - 2) * (columns - 2)
     percentage = (count * 100) / total
-    puts ''
     puts "Box is #{percentage}% filled with zeros"
     return percentage
   end
@@ -49,22 +27,22 @@ class TestFilledBoxPerc < Minitest::Test
   end
 
   def test_perc_1_row
-    assert_equal 25, @perc.prcnt(["0___"])
+    assert_equal 25, @perc.prcnt(['******', '*0   *', '******'])
   end
 
   def test_perc_1_column
-    assert_equal 25, @perc.prcnt(["_","_","0","_"])
+    assert_equal 25, @perc.prcnt(['***', '* *', '* *', '*0*', '* *', '***'])
   end
 
   def test_perc_1X1
-    assert_equal 100, @perc.prcnt(["0"])
+    assert_equal 100, @perc.prcnt(['***', '*0*', '***'])
   end
 
   def test_perc_0
-    assert_equal 0, @perc.prcnt(["___","___"])
+    assert_equal 0, @perc.prcnt(['*****', '*   *', '*   *', '*****'])
   end
 
   def test_perc_random
-    assert_equal 43, @perc.prcnt(["__0_0","00___","0__00","00000","_____","____0"])
+    assert_equal 43, @perc.prcnt(['*******', '*  0 0*', '*00   *', '*0  00*', '*00000*', '*     *', '*    0*', '*******'])
   end
 end
